@@ -1,3 +1,5 @@
+% Mateusz Gajewski, Kamil Bochenek
+
 n_samples = 50;
 fs = n_samples;
 t = linspace(0,1-1/fs,fs); % wektor czasu dla sygnału
