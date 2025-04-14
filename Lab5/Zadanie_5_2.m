@@ -1,7 +1,9 @@
 % Mateusz Gajewski, Kamil Bochenek
+clear
+close all
 
 n_samples = 50;
-fs = n_samples;
+fs = n_samples; % dla uproszczenia
 t = linspace(0,1-1/fs,fs); % wektor czasu dla sygnału
 x = sin(2*pi*17.3*t); % sygnał sin o f = 17.3 Hz; da przeciek dla fs = 50 Hz
 f = linspace(0,fs-fs/n_samples,n_samples); % wektor częstotliwości dla wykresu dft
@@ -12,14 +14,14 @@ figure
 tiledlayout("vertical")
 
 % widać przeciek, ale też wyraźne maksimum w 17 Hz
-S = fft(x,fs); 
+S = fft(x); 
 nexttile
 stem(f,abs(S))
 title("rectwin")
 
 % dalsze częstotliwości mają dużo mniejsze amplitudy, ale maksimum jest
 % mniej wyraźne
-x1 = x .* hamming(n_samples)'; % mnożenie oken Hamminga
+x1 = x .* hamming(n_samples)'; % mnożenie oknem Hamminga
 S = fft(x1);
 nexttile
 stem(f,abs(S))
@@ -32,18 +34,29 @@ nexttile
 stem(f,abs(S))
 title("blackman")
 
+%%
 [x, fs] = audioread("356188__mtg__violin-a-major.wav");
 figure
-% okno prostokątne jako punkt odniesienia
+tiledlayout
+nexttile
+% okno prostokątne; jako punkt odniesienia
 spectrogram(x,rectwin(1000),'yaxis');
+title("rectwin")
 
 % okno Hamminga; wyraźniejsze prążki częstotliwości
+nexttile
 spectrogram(x,hamming(1000),'yaxis');
+title("hamming")
+
 
 % okno Blackmana; jeszcze lepiej widać prążki (zwłaszcza w wyższych
 % częstotliwościach) ale są one grubsze
+nexttile
 spectrogram(x,blackman(1000),'yaxis');
+title("blackman")
 
 % z ciekawości, okno Blackmana, ale 256, nie 1000 próbek długości
 % duża utrata rozdzielczości na osi częstotliwości
+nexttile
 spectrogram(x,blackman(256),'yaxis');
+title("blackman 256")
