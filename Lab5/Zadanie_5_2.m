@@ -11,7 +11,9 @@ f = linspace(0,fs-fs/n_samples,n_samples); % wektor częstotliwości dla wykresu
 
 
 figure
-tiledlayout("vertical")
+t = tiledlayout("vertical");
+xlabel(t,"Częstotliwość [Hz]")
+ylabel(t,"Amplituda")
 
 % widać przeciek, ale też wyraźne maksimum w 17 Hz
 S = fft(x); 
