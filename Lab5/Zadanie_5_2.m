@@ -37,7 +37,7 @@ title("blackman")
 %%
 [x, fs] = audioread("356188__mtg__violin-a-major.wav");
 figure
-tiledlayout
+tiledlayout("vertical")
 nexttile
 % okno prostokątne; jako punkt odniesienia
 spectrogram(x,rectwin(1000),'yaxis');
