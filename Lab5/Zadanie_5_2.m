@@ -39,16 +39,21 @@ title("blackman")
 %%
 [x, fs] = audioread("356188__mtg__violin-a-major.wav");
 figure
-tiledlayout("vertical")
+tiledlayout("flow")
 nexttile
 % okno prostokątne; jako punkt odniesienia
 spectrogram(x,rectwin(1000),'yaxis');
 title("rectwin")
+xlim([2e5 4e5])
+ylim([0 0.25])
+
 
 % okno Hamminga; wyraźniejsze prążki częstotliwości
 nexttile
 spectrogram(x,hamming(1000),'yaxis');
 title("hamming")
+xlim([2e5 4e5])
+ylim([0 0.25])
 
 
 % okno Blackmana; jeszcze lepiej widać prążki (zwłaszcza w wyższych
@@ -56,9 +61,13 @@ title("hamming")
 nexttile
 spectrogram(x,blackman(1000),'yaxis');
 title("blackman")
+xlim([2e5 4e5])
+ylim([0 0.25])
 
 % z ciekawości, okno Blackmana, ale 256, nie 1000 próbek długości
 % duża utrata rozdzielczości na osi częstotliwości
 nexttile
 spectrogram(x,blackman(256),'yaxis');
 title("blackman 256")
+xlim([2e5 4e5])
+ylim([0 0.25])
